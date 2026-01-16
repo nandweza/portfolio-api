@@ -24,6 +24,7 @@
     "@types/nodemon": "^1.19.6",
     "@types/passport": "^1.0.17",
     "bcrypt": "^6.0.0",
+    "cloudinary": "^2.8.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",

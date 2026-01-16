@@ -1,13 +1,14 @@
 import dotenv from 'dotenv';
-import express, { Application, Request, Response } from 'express';
-import path from 'path';
-
-const app = express();
-
 dotenv.config();
 
+import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import homeRoutes from '../src/routes/homeRoutes';
+
+import { errorHandler } from './middleware/errorHandler';
+
+const app = express();
 
 
 app.use(cors());
@@ -36,18 +37,18 @@ async function startDataBase() {
 
     try {
         await mongoose.connect(mongoUri);
-        console.log("DB connected...");
+        console.log("DataBase connection successful.");
     } catch (error) {
-        console.log("MongDB connection failed: ", error);
+        console.log("DataBase connection failed: ", error);
         process.exit(1);
     }  
 }
 
 startDataBase();
 
+app.use('/', homeRoutes);
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello, world!').status(200);
-});
+
+app.use(errorHandler);
 
 export default app;
