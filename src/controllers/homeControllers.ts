@@ -4,7 +4,6 @@ import { uploadToCloudinary } from '../utils/uploadToCloudinary';
 import { deleteFromCloudinary } from '../utils/cloudinaryDelete';
 
 import {
-    HomeModel,
     getHomeData,
     updateHomeData,
     createHomeData,
@@ -32,7 +31,7 @@ export const newHomeData = async (
             "hero-image"
         );
 
-        const homeData = await HomeModel.create({
+        const homeData = await createHomeData({
             name,
             title,
             description,
