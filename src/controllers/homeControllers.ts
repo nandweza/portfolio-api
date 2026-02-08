@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction} from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../utils/appError';
 import { uploadToCloudinary } from '../utils/uploadToCloudinary';
 import { deleteFromCloudinary } from '../utils/cloudinaryDelete';
@@ -36,8 +36,8 @@ export const newHomeData = async (
             title,
             description,
             resume,
-            image: uploadResult.secure_url,
-            imagePublicId: uploadResult.public_id
+            image: uploadResult.secure_url,  //public https url for displaying the image.
+            imagePublicId: uploadResult.public_id  // public id for managing the image.
         });
 
         res.status(201).json({
