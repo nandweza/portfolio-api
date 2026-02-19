@@ -6,6 +6,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { AppError } from "../utils/appError";
 import { createUser } from "../db/user";
+// import * as userModule from "../db/user";
+// console.log(userModule);
 
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -18,7 +20,7 @@ export const registerUser = async (
         const { username, password } = req.body;
 
         if (!username || !password) {
-            throw new AppError("Missing username or password");
+            throw new AppError("Missing username or password", 400);
         }
 
         const salt = await bcrypt.genSalt(10);

@@ -3,7 +3,7 @@ import mongoose, { Document } from "mongoose";
 export interface IProject extends Document {
     title: string;
     description: string;
-    techStack: string;  //it has to be an array, do not forget.
+    techStack: [string];
     liveUrl: string;
     codeUrl: string;
     image: string;
@@ -22,7 +22,7 @@ const ProjectSchema = new mongoose.Schema(
             required: true,
         },
         techStack: {
-            type: String,
+            type: [String],
             required: true,
         },
         liveUrl: {
