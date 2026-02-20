@@ -23,6 +23,8 @@ export const UserModel = mongoose.model<IUser>('User', UserSchema);
 
 export const getUser = () => UserModel.find();
 
+export const getUserByUsername = (username: string) => UserModel.findOne({username});
+
 export const createUser = (values: Record<string, any>) => new UserModel(values)
                         .save().then((user) => user.toJSON());
 
