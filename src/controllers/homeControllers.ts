@@ -5,6 +5,7 @@ import { deleteFromCloudinary } from '../utils/cloudinaryDelete';
 
 import {
     getHomeData,
+    getHomeDataById,
     updateHomeData,
     createHomeData,
     deleteHomeDataById
@@ -77,11 +78,26 @@ export const updatedHomeData = async (
         if (Array.isArray(id)) {
             throw new AppError("Invalid id", 400);
         }
+
+        // fetch the home page data from the database
+        const existingData = await getHomeDataById(id);
+
+        if (!existingData) {
+            throw new AppError("Data not found", 404);
+        }
+
         const { name, title, description, resume } = req.body;
 
         const updateData: any = { name, title, description, resume };
 
         if (req.file) {
+
+            //delete image from database if it exists before updating
+            if (existingData.imagePublicId) {
+                await deleteFromCloudinary(existingData.imagePublicId);
+            }
+
+            // upload new image
             const uploadResult = await uploadToCloudinary(
                 req.file.buffer,
                 "hero-image"

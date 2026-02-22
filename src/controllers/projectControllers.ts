@@ -5,6 +5,7 @@ import { deleteFromCloudinary } from '../utils/cloudinaryDelete';
 
 import {
     getProjects,
+    getProjectById,
     createProject,
     updateProjectById,
     deleteProjectById
@@ -92,6 +93,13 @@ export const updateProject = async (
             throw new AppError("Invalid id", 400);
         }
 
+        // fetch the project from the database
+        const existingProject = await getProjectById(id);
+
+        if (!existingProject) {
+            throw new AppError("Project not found", 404);
+        }
+
         const { 
             title, 
             description,
@@ -110,6 +118,13 @@ export const updateProject = async (
 
         //checks and updates image in the cloudinary server. 
         if (req.file) {
+            
+            //delete old image if it exists
+            if (existingProject.imagePublicId) {
+                await deleteFromCloudinary(existingProject.imagePublicId);
+            }
+
+            //upload new image
             const uploadResult = await uploadToCloudinary(
                 req.file.buffer,
                 "project-image"

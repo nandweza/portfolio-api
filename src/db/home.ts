@@ -41,6 +41,8 @@ export const HomeModel = mongoose.model<IHome>('Home', HomeSchema);
 
 export const getHomeData = () => HomeModel.find();
 
+export const getHomeDataById = (id: string) => HomeModel.findById(id);
+
 export const createHomeData = (values: Record<string, any>) => new HomeModel(values)
                             .save().then((homeData) => homeData.toJSON());
 
