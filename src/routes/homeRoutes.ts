@@ -6,17 +6,18 @@ import {
     deletedHomeData 
 } from "../controllers/homeControllers";
 import { upload } from "../middleware/upload";
+import { requireAuth } from "../middleware/requireAuth";
 
 const router = Router();
 
 router
     .route("/")
     .get(getAllHomeData)
-    .post(upload({ fieldName: "image", maxSizeMB: 5 }) , newHomeData);
+    .post(upload({ fieldName: "image", maxSizeMB: 5 }), requireAuth, newHomeData);
 
 router
     .route("/:id")
-    .patch(upload({ fieldName: "image", maxSizeMB: 5 }), updatedHomeData)
-    .delete(deletedHomeData);
+    .patch(upload({ fieldName: "image", maxSizeMB: 5 }), requireAuth, updatedHomeData)
+    .delete(requireAuth, deletedHomeData);
 
 export default router;

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { getUserData, deletedUser } from "../controllers/userController";
+import { requireAuth } from "../middleware/requireAuth";
 
 const router = Router();
 
@@ -9,6 +10,6 @@ router
 
 router
     .route("/:id")
-    .delete(deletedUser);
+    .delete(requireAuth, deletedUser);
 
 export default router;

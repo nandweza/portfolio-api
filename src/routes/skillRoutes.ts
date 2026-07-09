@@ -7,12 +7,13 @@ import {
     updateSkill,
     deleteSkill
 } from '../controllers/skillController';
+import { requireAuth } from "../middleware/requireAuth";
 
 const router = Router();
 
 router
     .route("/")
-    .post(newSkill)
+    .post(requireAuth, newSkill)
     .get(returnSkills);
 
 router
@@ -21,7 +22,7 @@ router
 
 router
     .route("/:id")
-    .patch(updateSkill)
-    .delete(deleteSkill);
+    .patch(requireAuth, updateSkill)
+    .delete(requireAuth, deleteSkill);
 
 export default router;
