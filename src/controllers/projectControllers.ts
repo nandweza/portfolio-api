@@ -20,19 +20,25 @@ export const newProject = async (
     try {
         const { 
             title, 
-            description, 
-            techStack, 
+            description,
             liveUrl, 
             codeUrl, 
         } = req.body;
 
+        const techStack = 
+            typeof req.body.techStack === "string"
+                ? req.body.techStack.split(",")
+                : req.body.techStack;
+
         // throws an error if a field is missing.
         if (!title || !description || !techStack || !liveUrl || !codeUrl) {
+            console.log("Body:", req.body);
             throw new AppError("Misssing some data", 400);
         }
 
         // throws an error if image is missing
         if (!req.file) {
+            console.log("File", req.file);
             throw new AppError("Image file is required", 400);
         }
 

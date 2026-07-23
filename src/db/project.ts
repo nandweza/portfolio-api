@@ -31,7 +31,7 @@ const ProjectSchema = new mongoose.Schema(
         },
         codeUrl: {
             type: String,
-            require: true,
+            required: true,
         },
         image: {
             type: String,
