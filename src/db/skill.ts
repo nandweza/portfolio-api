@@ -4,6 +4,7 @@ export interface ISkill extends Document {
     name: string;
     category: string;
     iconKey: string;
+    iconColor: string;
 }
 
 const SkillSchema = new mongoose.Schema(
@@ -20,6 +21,9 @@ const SkillSchema = new mongoose.Schema(
         iconKey: {
             type: String,
             required: true,
+        },
+        iconColor: {
+            type: String,
         },
     }, { timestamps: true }
 );

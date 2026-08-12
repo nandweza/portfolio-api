@@ -32,7 +32,6 @@ export const newProject = async (
 
         // throws an error if a field is missing.
         if (!title || !description || !techStack || !liveUrl || !codeUrl) {
-            console.log("Body:", req.body);
             throw new AppError("Misssing some data", 400);
         }
 

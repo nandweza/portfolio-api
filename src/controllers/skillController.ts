@@ -15,9 +15,10 @@ export const newSkill = async (
     next: NextFunction
 ) => {
     try {
-        const { name, category, iconKey } = req.body;
+        const { name, category, iconKey, iconColor } = req.body ?? {};
 
         if (!name || !category || !iconKey) {
+            console.log("Body:", req.body);
             throw new AppError("Missing some data", 400);
         }
 
@@ -25,6 +26,7 @@ export const newSkill = async (
             name,
             category,
             iconKey,
+            iconColor,
         });
 
         res.status(201).json({
@@ -89,9 +91,9 @@ export const updateSkill = async (
             throw new AppError("Invalid id", 400);
         }
 
-        const { name, category, iconKey } = req.body;
+        const { name, category, iconKey, iconColor } = req.body;
 
-        const updateSkill: any = { name, category, iconKey };
+        const updateSkill: any = { name, category, iconKey, iconColor };
 
         const updated = await updateSkillById(id, updateSkill);
 
