@@ -4,11 +4,11 @@ dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import { errorHandler } from './middleware/errorHandler';
-import homeRoutes from '../src/routes/homeRoutes';
-import skillRoutes from '../src/routes/skillRoutes';
-import projectRoutes from '../src/routes/projectRoutes';
-import authRoutes from '../src/routes/authRoutes';
-import userRoutes from '../src/routes/userRoutes';
+import homeRoutes from './routes/homeRoutes';
+import skillRoutes from './routes/skillRoutes';
+import projectRoutes from './routes/projectRoutes';
+import authRoutes from './routes/authRoutes';
+import userRoutes from './routes/userRoutes';
 
 const app = express();
 
