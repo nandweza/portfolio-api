@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = __importDefault(require("./index"));
 const db_1 = require("./config/db");
-const port = 3000;
+const port = Number(process.env.PORT) || 3000;
 const hostname = 'http://127.0.0.1';
 (0, db_1.startDataBase)()
     .then(() => {

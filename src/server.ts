@@ -1,7 +1,7 @@
 import app from './index';
 import { startDataBase } from './config/db';
 
-const port: number = 3000;
+const port = Number(process.env.PORT) || 3000;
 const hostname: string = 'http://127.0.0.1';
 
 startDataBase()
