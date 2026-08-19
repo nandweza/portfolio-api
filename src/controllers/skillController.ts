@@ -17,7 +17,10 @@ export const newSkill = async (
     try {
         const { name, iconKey, iconColor } = req.body ?? {};
 
-        const category = typeof req.body.category === "string" ? req.body.category.split(" ") : req.body.category;
+        const category = 
+            typeof req.body.category === "string" 
+            ? req.body.category.split(" ") 
+            : req.body.category;
 
         if (!name || !category || !iconKey) {
             console.log("Body:", req.body);
