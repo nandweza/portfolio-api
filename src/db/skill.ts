@@ -2,7 +2,7 @@ import mongoose, { Document } from "mongoose";
 
 export interface ISkill extends Document {
     name: string;
-    category: string;
+    category: [string];
     iconKey: string;
     iconColor: string;
 }
@@ -15,7 +15,7 @@ const SkillSchema = new mongoose.Schema(
         },
 
         category: {
-            type: String,
+            type: [String],
             required: true,
         },
         iconKey: {
