@@ -5,7 +5,8 @@ const appError_1 = require("../utils/appError");
 const skill_1 = require("../db/skill");
 const newSkill = async (req, res, next) => {
     try {
-        const { name, category, iconKey, iconColor } = req.body ?? {};
+        const { name, iconKey, iconColor } = req.body ?? {};
+        const category = typeof req.body.category === "string" ? req.body.category.split(" ") : req.body.category;
         if (!name || !category || !iconKey) {
             console.log("Body:", req.body);
             throw new appError_1.AppError("Missing some data", 400);
